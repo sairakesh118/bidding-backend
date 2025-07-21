@@ -1,11 +1,10 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 import asyncio
-import nest_asyncio
 from jobs.auction_service import finalize_ended_auctions
 
 # Required if event loop is already running (e.g., FastAPI)
-nest_asyncio.apply()
+
 
 scheduler = BackgroundScheduler()
 
