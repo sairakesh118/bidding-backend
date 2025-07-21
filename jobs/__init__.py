@@ -1,0 +1,1 @@
+from .finalize_auctions import finalize_ended_auctions
