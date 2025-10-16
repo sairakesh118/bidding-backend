@@ -16,7 +16,7 @@ app = FastAPI()
 # CORS setup
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"]
+    allow_origins=["https://bidding-frontend-zegf.vercel.app","http://localhost:5173"]
 ,  # no trailing slash
     allow_credentials=True,
     allow_methods=["*"],

@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 from .schema import LoginRequest , LoginResponse, RegisterRequest, RegisterResponse
 from .service import login_user
@@ -10,8 +10,8 @@ router = APIRouter()
 async def login(data:LoginRequest):
     dbData=await db.users.find_one({"email": data.email})
     print("DB Data:", dbData)  # Debugging line to check the fetched user data
-    if dbData is None:  
-        return {"error": "User not found"}
+    if dbData is None or dbData["password"] != data.password:  
+       raise HTTPException(status_code=404, detail="user not found")
 
     token = await login_user(data)  
     return LoginResponse(
